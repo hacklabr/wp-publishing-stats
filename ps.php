@@ -29,6 +29,7 @@ class Publishing_Stats {
         wp_enqueue_script( 'jquery-ui' );
         wp_enqueue_script( 'jquery-flot', $this->url . '/js/jquery.flot.min.js' );
         wp_enqueue_script( 'jquery-flot-time', $this->url . '/js/jquery.flot.time.min.js' );
+        wp_enqueue_script( 'publishing-stats', $this->url . '/js/ps.js', array( 'jquery-flot', 'jquery-flot-time' ), false, true );
     }
 
     function admin_menu() {
@@ -112,11 +113,13 @@ class Publishing_Stats {
 
         // JavaScript conversion
 
-        $plodata = array();
+        $plotdata = array();
         foreach( $_plotdata as $k => $v ) {
-            $plotdata[] = '[' . $k * 1000 . ',' . $v . ']';
+            $plotdata[] = array($k * 1000, $v);
         }
-        $plotdata = '[' . implode( ',', $plotdata ) . ']';
+        $plotdata = json_encode($plotdata);
+        
+        wp_localize_script( 'publishing-stats', 'ps', array( 'plotdata' => $plotdata ) );
 
         // Load view
 
