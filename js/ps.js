@@ -1,7 +1,7 @@
 jQuery(document).ready(function(){
     jQuery('#time_ini, #time_end').datepicker({ 'dateFormat': 'yy-mm-dd' });
     jQuery('.show-user-posts').click(function(){
-        jQuery(this).next().slideDown();
+        jQuery(this).next().slideToggle();
     });
 });
 
