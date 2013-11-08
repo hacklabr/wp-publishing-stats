@@ -55,15 +55,8 @@
                 <a href="user-edit.php?user_id=<?php echo $k; ?>"><?php echo $v['display_name']; ?></a>
             </td>
             <td>
-            <a href="javascript:void(0);" class="show-user-posts"><?php echo $v['post_count']; ?> post<?php echo $v['post_count'] > 1 ? 's' : ''; ?></a>
-            <div class="user-posts">
-            <?php
-                $curtime = 0;
-                foreach( $v['posts'] as $time => $html ) {
-                    echo implode( '', $html );
-                }
-            ?>
-            </div>
+                <a href="javascript:void(0);" class="show-user-posts"><?php echo $v['post_count']; ?> post<?php echo $v['post_count'] > 1 ? 's' : ''; ?></a>
+                <div class="user-posts" data-posts="<?php echo implode( ',', $v['posts'] ); ?>"></div>
             </td>
             <td><?php echo $v['posts_per_day']; ?></td>
         </tr>

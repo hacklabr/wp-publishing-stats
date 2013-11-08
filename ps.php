@@ -87,8 +87,8 @@ class Publishing_Stats {
                     'posts' => array(),
                     'post_count' => 0
                 );
-            $date = date( 'Y-m-d', $k );
-            $userdata[ $author_id ]['posts'][ $k ][] = '<li><a href="' . get_permalink( $p->ID ) . '">' . $p->post_title . '</a> (' . $date . ')</li>';
+            
+            $userdata[ $author_id ]['posts'][] = $p->ID;
             $userdata[ $author_id ]['post_count']++;
 
             $totals['days'][ $k ] = 1;
@@ -130,11 +130,22 @@ class Publishing_Stats {
         return $a['display_name'] > $b['display_name'] ? 1 : -1;
     }
     
+    function get_user_posts() {
+        $ids = explode(',', filter_input(INPUT_GET, 'ids', FILTER_SANITIZE_STRING));
+        $html = '';
+        
+        foreach ($ids as $id) {
+            $p = get_post($id);
+            $html .= '<li><a href="' . get_permalink( $p->ID ) . '">' . $p->post_title . '</a> (' . $p->post_date . ')</li>';
+        }
+        
+        echo $html;
+        die();
+    }
 }
 
 function ps_init() {
     new Publishing_Stats();
 }
 add_action( 'plugins_loaded', 'ps_init' );
-
-?>
+add_action( 'wp_ajax_ps_get_user_posts', array('Publishing_Stats', 'get_user_posts'));

@@ -1,7 +1,20 @@
 jQuery(document).ready(function(){
     jQuery('#time_ini, #time_end').datepicker({ 'dateFormat': 'yy-mm-dd' });
     jQuery('.show-user-posts').click(function(){
-        jQuery(this).next().slideToggle();
+        postsDiv = jQuery(this).next(); 
+        
+        if (postsDiv.is(':empty')) {
+            jQuery("body").css("cursor", "progress");
+            jQuery.get(
+                ajaxurl,
+                { action: 'ps_get_user_posts', ids: postsDiv.data('posts') }
+            ).done(function(data) {
+                postsDiv.html(data);
+                jQuery("body").css("cursor", "auto");
+            });
+        }
+        
+        postsDiv.slideToggle();
     });
 });
 
