@@ -55,15 +55,8 @@
                 <a href="user-edit.php?user_id=<?php echo $k; ?>"><?php echo $v['display_name']; ?></a>
             </td>
             <td>
-            <a href="javascript:void(0);" class="show-user-posts"><?php echo $v['post_count']; ?> post<?php echo $v['post_count'] > 1 ? 's' : ''; ?></a>
-            <div class="user-posts">
-            <?php
-                $curtime = 0;
-                foreach( $v['posts'] as $time => $html ) {
-                    echo implode( '', $html );
-                }
-            ?>
-            </div>
+                <a href="javascript:void(0);" class="show-user-posts"><?php echo $v['post_count']; ?> post<?php echo $v['post_count'] > 1 ? 's' : ''; ?></a>
+                <div class="user-posts" data-posts="<?php echo implode( ',', $v['posts'] ); ?>"></div>
             </td>
             <td><?php echo $v['posts_per_day']; ?></td>
         </tr>
@@ -71,40 +64,4 @@
     <?php endforeach; ?>
     
     </table>
-
-    <script type="text/javascript">
-        jQuery(document).ready(function(){
-            jQuery('#time_ini, #time_end').datepicker({ 'dateFormat': 'yy-mm-dd' });
-            jQuery('.show-user-posts').click(function(){
-                jQuery(this).next().slideDown();
-            });
-        });
-        
-        var i = 0;
-        var plotdata = <?php echo $plotdata; ?>;
-        var p = jQuery.plot(jQuery('#placeholder'), [{
-            'data': plotdata,
-            'lines': { 'show': true },
-            'points': { 'show': true },
-        }],{
-            'grid': {
-                'borderWidth': 0
-            },
-            'xaxis': {
-                'mode': 'time',
-                'timeformat': '%d/%m',
-                'tickSize': [2, 'day']
-            }
-        });
-        jQuery.each(p.getData()[0].data, function(i, el){
-            var o = p.pointOffset({x: el[0], y: el[1]});
-            jQuery('<div class="data-point-label">' + el[1] + '</div>').css( {
-                position: 'absolute',
-                left: o.left - 4,
-                top: o.top - 25,
-                display: 'none'
-            }).appendTo(p.getPlaceholder()).fadeIn('slow');
-        });
-    </script>
-
 </div>
