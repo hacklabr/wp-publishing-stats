@@ -18,7 +18,6 @@ class Publishing_Stats {
         $this->url = plugins_url( false, __FILE__ );
 
         add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-        add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
     }
 
     function admin_enqueue_scripts() {
@@ -30,8 +29,10 @@ class Publishing_Stats {
     }
 
     function admin_menu() {
-        add_submenu_page( 'options-general.php', __( 'Publishing Stats', 'ps' ), __( 'Publishing Stats', 'ps' ),
+        $page_hook_suffix = add_submenu_page( 'options-general.php', __( 'Publishing Stats', 'ps' ), __( 'Publishing Stats', 'ps' ),
             'manage_options', 'ps', array( $this, 'submenu_page' ) );
+
+        add_action('admin_print_scripts-' . $page_hook_suffix, array( $this, 'admin_enqueue_scripts' ) );
     }
 
     function submenu_page() {
