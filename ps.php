@@ -5,7 +5,7 @@
 * Description: User publishing statistics
 * Version: 0.01
 * Author: Leo Germani, Vinicius Massuchetto
-* Author URI: http://github.com/vmassuchetto/wp-publishing-stats
+* Author URI: http://github.com/hacklabr/wp-publishing-stats
 */
 class Publishing_Stats {
 
