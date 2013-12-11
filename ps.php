@@ -11,8 +11,7 @@ class Publishing_Stats {
 
     var $dir;
 
-    function Publishing_Stats() {
-
+    function __construct() {
         load_plugin_textdomain( 'ps', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 
         $this->dir = dirname( __FILE__ );
@@ -21,7 +20,6 @@ class Publishing_Stats {
         add_action( 'admin_menu', array( $this, 'admin_menu' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
         add_action( 'wp_ajax_get_data', array( $this, 'wp_ajax_get_data' ) );
-
     }
 
     function admin_enqueue_scripts() {
