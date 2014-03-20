@@ -5,23 +5,19 @@
 * Description: User publishing statistics
 * Version: 0.01
 * Author: Leo Germani, Vinicius Massuchetto
-* Author URI: http://github.com/vmassuchetto/wp-publishing-stats
+* Author URI: http://github.com/hacklabr/wp-publishing-stats
 */
 class Publishing_Stats {
 
     var $dir;
 
-    function Publishing_Stats() {
-
+    function __construct() {
         load_plugin_textdomain( 'ps', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
 
         $this->dir = dirname( __FILE__ );
         $this->url = plugins_url( false, __FILE__ );
 
         add_action( 'admin_menu', array( $this, 'admin_menu' ) );
-        add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
-        add_action( 'wp_ajax_get_data', array( $this, 'wp_ajax_get_data' ) );
-
     }
 
     function admin_enqueue_scripts() {
@@ -33,8 +29,10 @@ class Publishing_Stats {
     }
 
     function admin_menu() {
-        add_submenu_page( 'options-general.php', __( 'Publishing Stats', 'ps' ), __( 'Publishing Stats', 'ps' ),
+        $page_hook_suffix = add_submenu_page( 'options-general.php', __( 'Publishing Stats', 'ps' ), __( 'Publishing Stats', 'ps' ),
             'manage_options', 'ps', array( $this, 'submenu_page' ) );
+
+        add_action('admin_print_scripts-' . $page_hook_suffix, array( $this, 'admin_enqueue_scripts' ) );
     }
 
     function submenu_page() {
