@@ -1,7 +1,7 @@
 <?php
 /*
 * Plugin Name: Publishing Stats
-* Plugin URI: http://github.com/vmassuchetto/wp-publishing-stats
+* Plugin URI: http://github.com/hacklabr/wp-publishing-stats
 * Description: User publishing statistics
 * Version: 0.01
 * Author: Leo Germani, Vinicius Massuchetto
