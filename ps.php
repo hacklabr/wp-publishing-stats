@@ -3,7 +3,7 @@
 * Plugin Name: Publishing Stats
 * Plugin URI: https://github.com/hacklabr/wp-publishing-stats
 * Description: User publishing statistics
-* Version: 0.3
+* Version: 0.4
 * Author: Leo Germani, Vinicius Massuchetto
 * Author URI: http://github.com/hacklabr/wp-publishing-stats
 */
