@@ -1,4 +1,5 @@
 jQuery(document).ready(function(){
+    jQuery.datepicker.regional[psDatepicker.lang];
     jQuery('#time_ini, #time_end').datepicker({ 'dateFormat': 'yy-mm-dd' });
     jQuery('.show-user-posts').click(function(){
         postsDiv = jQuery(this).next(); 
