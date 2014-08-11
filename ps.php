@@ -35,10 +35,10 @@ class Publishing_Stats {
         wp_enqueue_script( 'jquery-flot-time', $this->url . '/js/jquery.flot.time.min.js' );
         wp_enqueue_script( 'jquery-ui-datepicker' );
 
-        wp_enqueue_script( 'jquery-ui-datepicker-i18n', "http://jquery-ui.googlecode.com/svn/tags/latest/ui/i18n/jquery.ui.datepicker-$lang.js" );
+        wp_enqueue_script( 'jquery-ui-datepicker-i18n', "//jquery-ui.googlecode.com/svn/tags/latest/ui/i18n/jquery.ui.datepicker-$lang.js" );
         $data['lang'] = $lang;
 
-        wp_enqueue_style( 'jquery-datepicker-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css' );
+        wp_enqueue_style( 'jquery-datepicker-style', '//ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css' );
         wp_enqueue_script( 'publishing-stats', $this->url . '/js/ps.js', array( 'jquery-flot', 'jquery-flot-time', 'jquery-ui-datepicker' ), false, true );
         wp_localize_script( 'publishing-stats', 'psDatepicker', $data );
     }
